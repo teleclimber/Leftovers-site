@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Leftovers Dropserver app</title>
+	<link href="main.css" rel="stylesheet" />
+	<link rel="icon" href="app/leftovers-icon-4226f914.png" />
+</head>
+<body>
+	<header style="border-color: #059669">
+		<img src="app/leftovers-icon-4226f914.png" />
+		<div>
+			<hgroup>
+				<h1>Leftovers</h1>
+				<p>&ldquo;Don&#39;t let your delicious leftovers go to waste&rdquo;</p>
+			</hgroup>
+		</div>
+	</header>
+	<main>
+		<section>
+			<p>
+				To install paste this link into the "New App" page of your
+				<a href="https://dropserver.org">Dropserver</a> instance:
+			</p>
+			<ds-install-app>
+				<input type="text" readonly value=""/>
+				<a href="app/app-listing.json">App Link</a>
+				<button></button>
+			</ds-install-app>
+		</section>
+		<aside>
+			<p>Leftovers runs on <a href="https://dropserver.org">Dropserver</a>, 
+				an open source platform for your personal web services.</p>
+			<a href="https://dropserver.org" class="dropserver-logo">
+				dr<span class="drop-o">o</span>p<span class="s">server</span></a>
+		</aside>
+	</main>
+
+	<article>
+		<p><strong>Leftovers</strong> is a Dropserver app that helps you keep track of the leftover meals you have in your fridge.</p>
+
+		<p>When you put some leftovers in the refrigerator pop open the app and take a picture with the built-in camera. Add a few words to describe the contents and set the number of days before it spoils.</p>
+
+		<p>Open the app's main screen to see what is available to put in kid's lunchboxes or to add to a meal tonight.</p>
+
+		<section class="screenshots">
+			<figure>
+				<img src="add-leftovers.png">
+				<figcaption>Add leftovers to the list.</figcaption>
+			</figure>
+			<figure>
+				<img src="leftovers-list.png">
+				<figcaption>The list of leftovers.</figcaption>
+			</figure>
+		</section>
+
+		<p>The app's main screen is a listing of items you have in the fridge, ordered by spoil date. A red label indicates it's spoiled, and a green one shows it will soon.</p>
+
+		<h2>Usage Tips</h2>
+
+		<p>The app is a Progressive Web App. After installing on your Dropserver instance you can add it to the home screen of your phone for speedy access. More info on adding apps to your home screen are available <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing">here</a>.</p>
+
+		<p>When you have eaten or are otherwise finished with some leftovers, <strong>remove them from the list</strong>. Tap the item, tap the edit icon, check "finished", and tap "Save".</p>
+
+		<p>It's easier to find leftovers in the fridge if you include the container lid in the picture, particularly if the lid has a distincitve color.</p>
+
+		<p>You can make changes to the items in your list of leftovers. Tap the item on the list and tap the "edit" icon (blue circle). You can take a new picture and change the text and description. The spoil date won't change unless you explicitly "change dates".</p>
+
+		<p>Add <strong>other users</strong> to your Leftovers appspace so that multiple people can add and see what's in the fridge.</p>
+
+		<h2>More Information</h2>
+
+		<p>See the Leftovers app's <a href="app/index.html">details and version history</a>.</p>
+
+		<p>Leftovers was created by <a href="https://olivierforget.net">Olivier Forget</a>. This site's source code is on <a href="https://github.com/teleclimber/Leftovers-site">github.com/teleclimber/Leftovers-site</a>.</p>
+		
+	</article>
+
+	<script>
+		class DsInstallApp extends HTMLElement {
+			constructor() {
+				self = super();
+			}
+			connectedCallback() {
+				const input_elem = self.querySelector("input");
+				const link_elem = self.querySelector("a");
+				link_elem.innerText = "Drag and Drop this link";
+				input_elem.value = link_elem.href;
+				const button_elem = self.querySelector("button");
+				const button_text = "Copy to Clipboard"
+				button_elem.innerHTML = button_text;
+				button_elem.addEventListener( "click", () => {
+					input_elem.select();
+					document.execCommand("copy");
+					button_elem.innerHTML = "Copied!";
+					setTimeout(() => {
+						button_elem.innerHTML = button_text;
+					}, 1500);
+				});
+				self.classList.add("connected");
+			}
+		}
+		customElements.define("ds-install-app", DsInstallApp);
+	</script>
+</body>
+</html>

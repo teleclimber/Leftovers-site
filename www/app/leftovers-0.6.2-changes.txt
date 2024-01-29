@@ -1,0 +1,7 @@
+0.6.2
+This release includes small but necessary improvements to the user interface:
+
+- The "Save" button will now show a "loading" indication and will prevent you from saving the same leftovers multiple times.
+- Fix the UI when an item has no photo.
+
+Also this release changes how some things work under the hood, in particular the installable web-app.

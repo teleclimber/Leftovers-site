@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+/* CSS resets inspired by:
+- https://keithjgrant.com/posts/2024/01/my-css-resets/
+- https://piccalil.li/blog/a-more-modern-css-reset/
+- https://github.com/kognise/water.css/blob/master/dist/light.css
+*/
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd, pre {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
+img {
+	display: block;
+}
+input, button,
+textarea, select {
+	font: inherit;
+}
+
+/* tokens */
+body {
+	--serif-font: Cambria, serif;
+	--sans-font: Calibri, sans-serif;
+}
+
+.version {
+	font-weight: bold;
+	font-family: var(--sans-font);
+}
+
+/* actual styles */
+body {
+	font-family: var(--serif-font);
+	line-height: 1.4;
+	font-size: 1.2em;
+	max-width: 50rem;
+	margin: 20px auto;
+	padding: 0 10px;
+	color: #363636;
+	background: #ffffff;
+	text-rendering: optimizeLegibility;
+}
+body > header {
+	border-bottom: 8px solid grey;
+	display: grid;
+	--image-w: 5rem;
+	grid-template-columns: 1fr;
+	grid-gap: 0.2rem;
+}
+body > header:has(img) {
+	grid-template-columns: var(--image-w) 1fr;
+}
+body > header img {
+	max-width: var(--image-w);
+	max-height: var(--image-w);
+}
+body > header h1 {
+	margin: 0;
+	margin-top: 1.5rem;
+	font-family: var(--sans-font);
+	line-height: 1;
+}
+body > header hgroup p {
+	font-style: italic;
+	margin-bottom: 0.5rem;
+	text-wrap: balance;
+}
+
+main {
+	margin: 2rem 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+}
+aside {
+	padding-bottom: 1rem;
+	background-color: rgb(26, 60, 107);
+	color: rgb(219, 220, 230);
+	font-family: var(--sans-font);
+	text-align: center;
+	text-wrap: balance;
+}
+aside a {
+	color: rgb(218, 227, 255);
+}
+aside a a:hover {
+	color: white;
+}
+aside .dropserver-logo {
+	display:block;
+	margin-top: 1.5rem;
+	font-size: 2rem;
+	font-family: Calibri, sans-serif;
+	color:#e5e7eb;
+	font-weight: bold;
+	text-decoration: none;
+}
+aside .dropserver-logo .drop-o {
+	text-shadow: 0px -.3em 0px hsla(229, 19%, 56%, 0.8),0px -.6em 0px hsla(229, 27%, 57%, 0.5),0px -1em 0px hsla(242, 24%, 59%, 0.2);
+}
+aside .dropserver-logo .s {
+	background: linear-gradient(-90deg,rgb(80, 109, 237) 0%,rgb(255, 66, 66) 50%,rgb(255, 188, 93) 100%);
+	background-clip: border-box;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+aside p {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+	font-weight: 600;
+}
+main section {
+	padding: 0.5rem;
+	background-color: #f3f3f3;
+}
+ds-install-app {
+	margin-top: 0.5rem;
+	display:grid;
+	grid-template-columns: 1fr;
+	grid-gap: 0.5rem;
+}
+ds-install-app a {
+	justify-self: center;
+}
+ds-install-app input {
+	display:none;
+	grid-column: 1/-1;
+	font-size: 1rem;
+	padding: 0.3rem 0.5rem;
+}
+ds-install-app.connected input {
+	display: inline;
+}
+ds-install-app button {
+	display: none;
+}
+ds-install-app.connected button {
+	display: block;
+	justify-self: end;
+	padding: 0.2rem 0.5rem;
+	font-family: var(--sans-font);
+	font-size: 1rem;
+}
+ds-install-app.connected a {
+	display:none;
+}
+h2 {
+	font-family: var(--sans-font);
+	margin-top: 2rem;
+}
+dl {
+	margin: 1rem 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0 0.5rem;
+	align-items: baseline;
+}
+dt {
+	font-family: var(--sans-font);
+	font-size: 1rem;
+	color: #777;
+}
+ul {
+	list-style-type: none;
+	padding:0;
+}
+li {
+	margin: 1rem 0;
+}
+pre {
+	margin-top: 0.2rem;
+	padding: 0.5rem;
+	background-color: #f3f3f3;
+	white-space: pre-wrap;
+}
+
+@media (min-width: 40rem) {
+	body > header {
+		--image-w: 7rem;
+		grid-gap: 0.5rem;
+	}
+	body > header h1 {
+		margin-top: 2rem;
+	}
+	.dropserver-logo {
+		margin-top: 0.1rem;
+	}
+	main {
+		grid-template-columns: 1fr 18rem;
+	}
+	aside {
+		width: 18rem;
+	}
+	ds-install-app.connected {
+		grid-template-columns: 1fr 1fr;
+	}
+	ds-install-app.connected button {
+		grid-column: -2/-1;
+	}
+	dl {
+		grid-template-columns: 1fr 2fr;
+	}
+	dt {
+		justify-self: end;
+	}
+	dd {
+		grid-column: 2/4;
+		margin: 0;
+	}
+}
+	</style>
+	<link rel="icon" href="leftovers-icon-4226f914.png" />
+</head>
+<body>
+	<header style="border-color: #059669">
+		<img src="leftovers-icon-4226f914.png" />
+		<div>
+			<hgroup>
+				<h1>Leftovers</h1>
+				<p>&ldquo;Don&#39;t let your delicious leftovers go to waste&rdquo;</p>
+			</hgroup>
+		</div>
+	</header>
+	<main>
+		<section>
+			<p>
+				To install paste this link into the "New App" page of your
+				<a href="https://dropserver.org">Dropserver</a> instance:
+			</p>
+			<ds-install-app>
+				<input type="text" readonly value=""/>
+				<a href="app-listing.json">App Link</a>
+				<button></button>
+			</ds-install-app>
+		</section>
+		<aside>
+			<p>Leftovers runs on <a href="https://dropserver.org">Dropserver</a>, 
+				an open source platform for your personal web services.</p>
+			<a href="https://dropserver.org" class="dropserver-logo">
+				dr<span class="drop-o">o</span>p<span class="s">server</span></a>
+		</aside>
+	</main>
+
+	<h2>Details:</h2>
+	<dl>
+		<dt>Version:</dt>
+		<dd>0.6.2 (2024-01-26)</dd>
+		<dt>Schema:</dt>
+		<dd>1</dd>
+		<dt>Authors:</dt>
+		<dd>
+			<p>
+				Olivier Forget
+				<a href="https://olivierforget.net">https://olivierforget.net</a>
+			</p>
+		</dd>
+		<dt>Code Repository:</dt>
+		<dd><a href="https://github.com/teleclimber/Leftovers">https://github.com/teleclimber/Leftovers</a></dd>
+		<dt>License:</dt>
+		<dd>MIT</dd>
+	</dl>
+
+	<h2>Version history:</h2>
+	<ul>
+		<li>
+			<span class="version">0.6.2</span> released 2024-01-26
+			<pre>This release includes small but necessary improvements to the user interface:
+
+- The &#34;Save&#34; button will now show a &#34;loading&#34; indication and will prevent you from saving the same leftovers multiple times.
+- Fix the UI when an item has no photo.
+
+Also this release changes how some things work under the hood, in particular the installable web-app.</pre>
+		</li>
+		<li>
+			<span class="version">0.6.1</span> released 2023-10-04
+			<pre>changelog.txt</pre>
+		</li>
+	</ul>
+
+	<script>
+		class DsInstallApp extends HTMLElement {
+			constructor() {
+				self = super();
+			}
+			connectedCallback() {
+				const input_elem = self.querySelector("input");
+				const link_elem = self.querySelector("a");
+				link_elem.innerText = "Drag and Drop this link";
+				input_elem.value = link_elem.href;
+				const button_elem = self.querySelector("button");
+				const button_text = "Copy to Clipboard"
+				button_elem.innerHTML = button_text;
+				button_elem.addEventListener( "click", () => {
+					input_elem.select();
+					document.execCommand("copy");
+					button_elem.innerHTML = "Copied!";
+					setTimeout(() => {
+						button_elem.innerHTML = button_text;
+					}, 1500);
+				});
+				self.classList.add("connected");
+			}
+		}
+		customElements.define("ds-install-app", DsInstallApp);
+	</script>
+</body>
+</html>
