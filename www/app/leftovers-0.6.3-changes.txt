@@ -1,0 +1,7 @@
+0.6.3
+This release includes the following improvements:
+
+- Add a "New Item" shortcut: long press the Leftovers icon on your device to activate
+- The camera only turns on when needed and turns off when not needed
+- Add user-friendly error messages if the camera can not be used
+- Plus a few additional minor tweaks
